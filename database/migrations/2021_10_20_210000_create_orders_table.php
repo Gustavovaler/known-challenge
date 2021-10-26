@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_id');
             $table->unsignedBigInteger('client_id');
             $table->string('payment_method_id');
-            $table->float('total_amount');
+            $table->decimal('total_amount',10,2);
             $table->boolean('processed')->default(false);
 
         });

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Scripts\SalesScript;
 
 class GetSalesCommand extends Command
 {
@@ -37,7 +38,11 @@ class GetSalesCommand extends Command
      */
     public function handle()
     {
-        echo $this->option('year') ?? 2021;
+        //echo $this->option('year') ?? 2021;
+        $script = new SalesScript();
+        //$sales = $script->getOrder('1023441621348-01');
+        $sales = $script->getOrdersList($this->option('year'));
+        $this->info($sales);
         return 0;
     }
 }
