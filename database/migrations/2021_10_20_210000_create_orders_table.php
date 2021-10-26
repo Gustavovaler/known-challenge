@@ -17,9 +17,9 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('order_id');
-            $table->unsignedBigInteger('client_id');
-            $table->string('payment_method_id');
-            $table->decimal('total_amount',10,2);
+            $table->unsignedBigInteger('client_id')->nullable();
+            $table->string('payment_method_id')->nullable();
+            $table->decimal('total_amount',10,2)->nullable();
             $table->boolean('processed')->default(false);
 
         });

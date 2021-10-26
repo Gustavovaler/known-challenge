@@ -52,15 +52,16 @@ class SalesScript {
 
         if ($response->successful()) {
             $decoded_data = json_decode($response->body());
+            $this->processOrders($decoded_data->list);
             $pages = $decoded_data->paging->pages;
             $current_page =  $decoded_data->paging->currentPage;
-
-            foreach ($decoded_data->list as $key ) {
-                if ($key->status == 'ready-for-handling') {
-                    $this->getOrder( $key->orderId);
-                }
+            echo 'Orders founds: ' . $decoded_data->stats->stats->totalValue->Count;
+            for ($i=1; $i <= $pages ; $i++) {
+                $response = Http::withHeaders($this->headers)->get('https://'.$this->account.'.vtexcommercestable.com.br/api/oms/pvt/orders',
+                         ['f_creationDate' => Carbon::createFromDate('2021','01','01'), 'f_hasInputInvoice' => false, 'page' => $i]);
+                $data =  json_decode($response->body())->list;
+                $this->processOrders($data);
             }
-            return $decoded_data->paging->currentPage;
         }
         if ($response->clientError()) {
             return 'Bad Request';
@@ -71,13 +72,11 @@ class SalesScript {
 
     }
 
-    public function getOrdersPage(){
-
+    public function processOrders($orders){
+        foreach ($orders as $key ) {
+                if ($key->status == 'ready-for-handling') {
+                    $this->getOrder( $key->orderId);
+                }
+            }
     }
 }
-
-
-
-
-
-//https://knownonline.vtexcommercestable.com.br/api/oms/pvt/orders?f_creationDate=creationDate%3A%5B2016-01-01T02%3A00%3A00.000Z%20TO%202021-01-01T01%3A59%3A59.999Z%5D&f_hasInputInvoice=false&page=2
