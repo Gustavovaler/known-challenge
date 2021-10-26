@@ -28,7 +28,16 @@ $ php artisan migrate
 
 # Usage
 
+Get sales from 2021
+
 ```sh
-$ php artisan sales:get
+$ php artisan sales:get 
+```
+### Optional
+
+You can also get sales from another year
+
+```sh
+$ php artisan sales:get --year [year]
 ```
 
