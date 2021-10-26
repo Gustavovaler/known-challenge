@@ -16,9 +16,9 @@ composer install
 
 Now rename .env.example to .env and set your config data
 
-ACCOUNT_NAME=client-account-name
-API_KEY=X-VTEX-API-AppKey
-API_TOKEN=X-VTEX-API-AppToken
+ACCOUNT_NAME=client-account-name \  
+API_KEY=X-VTEX-API-AppKey  \
+API_TOKEN=X-VTEX-API-AppToken  \
 
 ```sh
 $ php artisan key:generate
