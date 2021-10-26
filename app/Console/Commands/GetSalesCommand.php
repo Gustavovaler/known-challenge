@@ -38,11 +38,9 @@ class GetSalesCommand extends Command
      */
     public function handle()
     {
-        //echo $this->option('year') ?? 2021;
         $script = new SalesScript();
-        //$sales = $script->getOrder('1023441621348-01');
         $this->info('working...');
-        $sales = $script->getOrdersList($this->option('year'));
-        return 0;
+        $result = $script->getOrdersList($this->option('year') ?? 2021);
+        return $result;
     }
 }
