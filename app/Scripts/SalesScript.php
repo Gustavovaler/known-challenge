@@ -47,7 +47,8 @@ class SalesScript
                     'product_id' => $item->productId,
                     'name' => $item->name,
                     'quantity' => $item->quantity,
-                    'order_id' => $order->id
+                    'order_id' => $order->id,
+                    'original_order_id' => $order->order_id
                 ]);
             }
         }

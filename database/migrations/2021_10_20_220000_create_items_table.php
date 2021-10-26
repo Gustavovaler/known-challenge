@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->string('name')->nullable();
             $table->integer('quantity')->nullable();
             $table->unsignedBigInteger('order_id');
+            $table->string('original_order_id')->nullable();
         });
     }
 
